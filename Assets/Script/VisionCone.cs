@@ -21,6 +21,11 @@ public class VisionCone : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private Transform respawnPoint;
 
+    public AudioSource Audio2;
+
+    public float timeRemaining = 5;
+    public bool timerIsRunning = false;
+
     void Start()
     {
         viewMesh = new Mesh ();
@@ -39,9 +44,34 @@ public class VisionCone : MonoBehaviour
         }
     }
 
+    void deathMethod()
+    {
+        timerIsRunning = true;
+        player.transform.position = respawnPoint.transform.position;
+        Physics.SyncTransforms();
+    }
+
     void LateUpdate()
     {
         DrawFieldOfView ();
+    }
+
+    void Update()
+    {
+        if (timerIsRunning)
+        {
+            if (timeRemaining > 0)
+            {
+                timeRemaining -= Time.deltaTime;
+            }
+            else
+            {
+                Debug.Log("Time has run out!");
+                timeRemaining = 0;
+                timerIsRunning = false;
+                Time.timeScale = 1;
+            }
+        }
     }
 
     void FindVisibleTargets()
@@ -59,9 +89,12 @@ public class VisionCone : MonoBehaviour
                 if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask))
                 {
                     visibleTargets.Add (target);
-                    // Respawn code 
-                    player.transform.position = respawnPoint.transform.position;
-                    Physics.SyncTransforms();
+                    Audio2.Play();
+                    deathMethod();
+                    // Respawn code
+                    // Audio2.Play();
+                    // player.transform.position = respawnPoint.transform.position;
+                    // Physics.SyncTransforms();
                     Debug.Log("ca marche sssaamere");
                 }
             }
