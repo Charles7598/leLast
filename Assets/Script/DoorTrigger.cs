@@ -14,6 +14,8 @@ public class DoorTrigger : MonoBehaviour
 
     public BoxCollider coll;
 
+    public AudioSource audio1;
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -21,6 +23,7 @@ public class DoorTrigger : MonoBehaviour
             myDoor.Play(openDoor, 0, 0.0f);
             objectToFind = GameObject.FindGameObjectWithTag(theTag);
             objectToFind.GetComponent<BoxCollider>().enabled = false;
+            audio1.Play();
             Destroy(this); 
         }
     }
