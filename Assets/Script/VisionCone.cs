@@ -23,7 +23,7 @@ public class VisionCone : MonoBehaviour
 
     public AudioSource Audio2;
 
-    public float timeRemaining = 5;
+    public float timeRemaining = 4;
     public bool timerIsRunning = false;
 
     void Start()
@@ -88,11 +88,10 @@ public class VisionCone : MonoBehaviour
                 float dstToTarget = Vector3.Distance (transform.position, target.position);
                 if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask))
                 {
+                    // Respawn code
                     visibleTargets.Add (target);
                     Audio2.Play();
                     deathMethod();
-                    // Respawn code
-                    // Audio2.Play();
                     // player.transform.position = respawnPoint.transform.position;
                     // Physics.SyncTransforms();
                     Debug.Log("ca marche sssaamere");
