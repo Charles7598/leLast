@@ -37,6 +37,6 @@ public class AttackScript : MonoBehaviour
         {
             Debug.Log("il prend des coups le bougre");
             playerAtm.DealDamage(enemyAtm.gameObject);
-        }            
+        }
     }
 }
