@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
-public class nextsceneScript : MonoBehaviour
+public class StartGame1 : MonoBehaviour
 {
-   void OnTriggerEnter(Collider other)
+   public void StartButton()
    {
-    SceneManager.LoadScene(4);
+    SceneManager.LoadScene(2);
    }
 }
